@@ -39,7 +39,7 @@ int main(int , char**)
     //Create a Logger object.If a ALogBaseWriter object is not provided , it creates a ALogWriter and register it as the first writer object.
     ALogger myLogger; //Logger with default std out writer
 
-    //adds a second writer that writes to file test1.txt
+    //add a second writer that writes to file test1.txt
     myLogger.registerNewWriter(new ALogFileWriter("test1.txt"));
 
     //one more stdout writers
@@ -47,8 +47,8 @@ int main(int , char**)
 
 
     //create two threads to test threaded publishers
-  //  thread t1=thread(&thread1_func,&myLogger);
-   // thread t2=thread(&thread2_func,&myLogger);
+    thread t1=thread(&thread1_func,&myLogger);
+    thread t2=thread(&thread2_func,&myLogger);
 
     //at this point logs are written to 3 different target , 2 on stdout one copy in test1.txt
     myLogger << "My first Log"; // now you should see My first log twice in console and also in 1 entry in test1.txt. with default severity and no User
@@ -61,8 +61,8 @@ int main(int , char**)
     //new writer writes logs with a custom format defined in class MyFormatter
 
     myLogger << " This log is channeled to 4 diffferent writer";
-  //  t1.join();
-   // t2.join();
+    t1.join();
+    t2.join();
 
 
     return 0;
