@@ -16,10 +16,15 @@ Add header and source files to your C++11 project or include alogger_all.hpp to 
 
 ## API
 
+Class: Alogger
 
 //Default constructor. Creates a Logger object.If a ALogBaseWriter object is not provided , it creates a ALogWriter and register it as the first writer object.
+
 Alogger myLogger(); //creates one stdout writers
-myLogger.registerNewWriter(new ALogFileWriter("test1.txt")); //adds a second writer that writes to file test1.txt
+
+//adds a second writer that writes to file test1.txt
+myLogger.registerNewWriter(new ALogFileWriter("test1.txt"));
+
 mylLogger.registerNewWriter(new ALogWriter()); //one more stdout writers
 //at this point logs are written to 3 different target , 2 on stdout one copy in test1.txt
 
