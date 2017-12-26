@@ -19,7 +19,7 @@ ALogFileWriter::~ALogFileWriter()
 }
 void ALogFileWriter::write(ALogData log)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+   // std::this_thread::sleep_for(std::chrono::milliseconds(50));
     *m_fileStream << m_formatter->format(log) <<endl;
 
 }
