@@ -15,7 +15,7 @@ User : A Custom string that gives information about the user.
 Add header and source files to your C++11 project or include alogger_all.hpp to any C++ module.
 
 ## API
-
+```c++
 Class: Alogger
 
 //Default constructor. Creates a Logger object.If a ALogBaseWriter object is not provided , it creates a ALogWriter and register it as the first writer object.
@@ -32,3 +32,4 @@ mylLogger.registerNewWriter(new ALogWriter()); //one more stdout writers
 mylLogger << "My first Log"; // now you should see My first log twice in console and also in 1 entry in test1.txt. with default severity and no User
 mylLogger (ALcritical) << "This is a very critical log"; //severity is changed
 mylLogger (ALLow,"main.cpp") << "something is not right here"; //user info is added to this console
+```
