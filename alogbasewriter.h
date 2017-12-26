@@ -9,6 +9,12 @@
 class ALogger;
 
 using namespace  std;
+/*
+  Abstract class for writers .Handles all internal thread operations , locks containers etc.
+  Expects derived classes to implement the write method.
+  Write methods gets a ALogData object and returns a string. ALogData object has all ingredients of a log message to build a output string
+*/
+
 
 class ALogBaseWriter
 {

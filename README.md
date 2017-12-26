@@ -2,7 +2,7 @@
 Asynchronous , non-blocking C++11 Logger Library free of known multi-threading issues such as busy spins or starving threads.
 It is fast , reliable and very easy to use. No third party dependencies. ALogger supports multiple instances of logger and multiple writers for each logger instance.
 
-# Class Definitions
+## Class Definitions
 ### ALogBaseWriter ALogFileWriter ALogWriter<br />
 Writer class is a thread wrapper that does the real I/O operations. It is derived from abstract ALogBaseWriter class and implements its own write function.Currently there are two writer classes , file writer (ALogFileWriter) and stdout writer (AlogWriter). To define a new writer , all you need to do is subclass ALogBaseWriter and implement your write function.For instance one can implement it in a way to post data to a REST API or a Database. Flexible nature of the library makes it very easy to extend.
 

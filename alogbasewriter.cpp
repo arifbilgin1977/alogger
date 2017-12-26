@@ -16,22 +16,23 @@ ALogBaseWriter::ALogBaseWriter(ALogFormatter* formatter) : m_formatter(formatter
 
 ALogBaseWriter::~ALogBaseWriter()
 {
-    //flush the stream if anything is left
+    //make sure worker thread is joined and terminated gracefully
     if(m_workerThread->joinable())
         m_workerThread->join();
+    //clean up heap objects
     delete m_workerThread;
     delete m_formatter;
 
 }
 
-void ALogBaseWriter::die()
+void ALogBaseWriter::die() //die flag is set to ture, whenever thread has no jobs and dying is set , it breaks the loop
 {
     m_dyingGuard.lock();
     m_dying = true;
     m_dyingGuard.unlock();
 }
 
-bool ALogBaseWriter::dying()
+bool ALogBaseWriter::dying() //check if thread is supposed to be terminated
 {
     m_dyingGuard.lock();
     bool rv= m_dying;

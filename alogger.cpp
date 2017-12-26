@@ -128,7 +128,11 @@ void ALogger::WorkerFunction()
                 list<ALogBaseWriter*>::iterator it= m_streams.begin();
                 while (it != m_streams.end())
                 {
+
+                    std::unique_lock<mutex> locker(*(*it)->acquireLock());
                     (*it)->die();
+                    locker.unlock();
+                    (*it)->condVariable()->notify_all();
                     it++;
                 }
                 //now end the loop

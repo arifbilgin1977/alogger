@@ -7,7 +7,17 @@
 #include <thread>
 #include "alogbasewriter.h"
 #include "alogdata.h"
+/*
+    Primary Logging class that encapsulates other aspects of the ALogger library.
+    It maintains its own thread to manage writer(subscribers) threads.
+    Error handling relies on exceptions but needs enhancements.
+    overloads << and () operators for data pushing.
 
+    supports 3 different logging mechanism:
+    logger << string;
+    logger(severity) << string;
+    logger (severity,user) << string
+*/
 
 
 class ALogger
