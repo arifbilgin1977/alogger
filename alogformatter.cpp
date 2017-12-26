@@ -15,3 +15,8 @@ string ALogFormatter::format(ALogData log)
     return rv;
 
 }
+
+ALogFormatter::~ALogFormatter()
+{
+
+}

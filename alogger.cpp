@@ -23,13 +23,11 @@ ALogger::~ALogger()
 }
 ALogger& ALogger::operator << (const std::string logData)
 {
-    ; // FIX ME , get severity etc somehow
-    //  m_queueGuard.lock();
+
     std::unique_lock<mutex> locker(m_queueGuard);
     m_logs.push(ALogData(logData,m_severity,m_user));
     locker.unlock();
     level1Condition.notify_all();
-    //   m_queueGuard.unlock();
     return *this;
 }
 ALogger& ALogger::operator () (const ALogSeverity svr)

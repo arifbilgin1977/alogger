@@ -14,7 +14,7 @@ class ALogBaseWriter
 {
     friend class ALogger;
 public:
-    ALogBaseWriter();
+    ALogBaseWriter(ALogFormatter *formatter=NULL);
     void die();
     bool dying();
     bool pushLog(ALogData log);
@@ -30,7 +30,7 @@ protected:
     queue<ALogData> m_logQueue; // logs waiting to be consumed
     bool m_dying;
     std::thread* m_workerThread;
-    ALogFormatter m_formatter;
+    ALogFormatter* m_formatter;
     std::condition_variable m_condition;
 
 };

@@ -5,9 +5,13 @@ using namespace std;
 
 class ALogFormatter
 {
+        friend class ALogger;
+        friend class ALogBaseWriter;
 public:
     ALogFormatter();
     virtual string format(ALogData log);
+protected:
+        ~ALogFormatter();
 
 };
 

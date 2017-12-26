@@ -7,7 +7,7 @@ class ALogFileWriter : public ALogBaseWriter
 {
     friend class ALogger;
 public:
-    ALogFileWriter(string fileName);
+    ALogFileWriter(string fileName,ALogFormatter* formatter=NULL);
 protected:
     virtual void write(ALogData log);
     virtual ~ALogFileWriter();

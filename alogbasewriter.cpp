@@ -2,8 +2,11 @@
 #include "alogger.h"
 #include <iostream>
 
-ALogBaseWriter::ALogBaseWriter() : m_formatter(ALogFormatter())
+ALogBaseWriter::ALogBaseWriter(ALogFormatter* formatter) : m_formatter(formatter)
 {
+
+    if(!m_formatter)
+        m_formatter=new ALogFormatter();
 
     //create the internal thread and begin consuming data
     m_workerThread=new std::thread(&ALogBaseWriter::workerFunction,this);
@@ -17,6 +20,7 @@ ALogBaseWriter::~ALogBaseWriter()
     if(m_workerThread->joinable())
         m_workerThread->join();
     delete m_workerThread;
+    delete m_formatter;
 
 }
 

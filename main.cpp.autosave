@@ -23,10 +23,8 @@ public:
 
 int main(int , char**)
 {
-    //Default constructor. Creates a Logger object.If a ALogBaseWriter object is not provided , it creates a ALogWriter and register it as the first writer object.
+    //Create a Logger object.If a ALogBaseWriter object is not provided , it creates a ALogWriter and register it as the first writer object.
     ALogger myLogger; //Logger with default std out writer
-
-    ALogFormatter f;
 
     //adds a second writer that writes to file test1.txt
     myLogger.registerNewWriter(new ALogFileWriter("test1.txt"));

@@ -8,7 +8,7 @@ using namespace  std;
 class ALogWriter : public ALogBaseWriter
 {
 public:
-        ALogWriter();
+        ALogWriter(ALogFormatter* formatter=NULL);
 protected:
 
     virtual void write(ALogData log);

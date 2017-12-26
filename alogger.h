@@ -13,7 +13,7 @@
 class ALogger
 {
 public:
-    ALogger(ALogBaseWriter *writer);
+    ALogger(ALogBaseWriter *writer=NULL);
     ~ALogger();
     ALogger& operator << (const std::string logData);
     ALogger& operator () (const ALogSeverity svr);
