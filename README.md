@@ -1,6 +1,6 @@
 # alogger
-Asynchronous , non-blocking C++11 Logger Library free of known multi-threading issues such as busy spins or starving threads.
-It is fast , reliable and very easy to use. No third party dependencies. ALogger supports multiple instances of logger and multiple writers for each logger instance.
+Asynchronous , non-blocking C++11 Logger Library , free of known multi-threading issues such as busy spins or starving threads.
+It is fast , reliable and very easy to use. No third party dependencies. ALogger supports multiple instances of logger object and multiple producers and consumers for each logger instance.Library can easily be extended to different types of consumers working with databases , web servers and more.
 
 ## Class Definitions
 ### ALogBaseWriter ALogFileWriter ALogWriter<br />
