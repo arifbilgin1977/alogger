@@ -44,10 +44,10 @@ ALogger& ALogger::operator ()(const ALogSeverity svr,string user)
 
 }
 
-/*Thread safe stream registration routine
- * Remember user provided streams should never be used again by the user
- * once a stream is registered with ALogger framework it is owned by a thread and deleted by the same thread.
- * We may need a object factory for custom ostreams.!!!!!!!!!
+/*Thread safe consumer registration. Consumers can be added during runtime.
+ * Remember user registered writers should never be used again by the user
+ * once a writer object is registered with ALogger framework it is owned by a thread and deleted by the framework.
+ * We may need an object factory for this.!!!!!!!!!
  *
 */
 
@@ -106,7 +106,7 @@ void ALogger::die()
 
 /*
  * this function is run within ALogger object thread
- * it watches the log queue and distribute the log objects to its stream containers.
+ * it watches the log queue and broadcast the log objects to its writers.
  * All registered containers get the log data and process it in their own worker thread
 */
 
