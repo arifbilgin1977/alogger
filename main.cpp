@@ -1,69 +1,116 @@
+/*
+Log Splitter (v:0.99)
+Utility to write stdin logs to multiple files.
+Usage:
+ALogger [file list]
+Example :
+alogger file1.txt file2.txt file3.txt
+
+Commands:
+:quit
+ terminates the program
+:warning
+ Switches log severity to warning
+:low
+ Switches log severity to low
+:medium
+ Switches log severity to medium
+:high
+ Switches log severity to high
+:critical
+ Switches log severity to critical
+:user:user_name
+ Switches user to user_name
+
+*/
+
+
+
 #include <iostream>
 #include "alogger.h"
 #include <fstream>
 #include "alogfilewriter.h"
 #include "alogwriter.h"
-
 using namespace std;
 
-class MyFormatter : public ALogFormatter
+ALogSeverity severity=ALwarning;
+string user="ALogger Demo";
+bool processCommand(string line)
 {
-public:
-    virtual string format(ALogData log)
-    {
+    if (line==":quit")
+        return false;
+    if(line==":warning")
+        severity=ALwarning;
+    if(line==":low")
+        severity=ALlow;
+    if(line==":medium")
+        severity=ALmedium;
+    if(line==":high")
+        severity=ALhigh;
+    if(line==":critical")
+        severity=ALcritical;
+    if(line.substr(0,6)==":user:")
+        user=line.substr(6);
+    return true;
+}
 
-        return "custom output with only log message:" + log.logMessage();
+static void printHelp()
+{
+    printf ("Log Splitter (v:0.99)\n");
+    printf ("Utility to write stdin logs to multiple files.\n");
+    printf ("Usage:\n");
+    printf ("ALogger [file list]\n");
+    printf ("Example usage:\n");
+    printf ("alogger file1.txt file2.txt file3.txt\n\n");
+    printf ("Commands:\n");
+    printf (":quit\n terminates the program\n");
+    printf (":warning\n Switches log severity to warning\n");
+    printf (":low\n Switches log severity to low\n");
+    printf (":medium\n Switches log severity to medium\n");
+    printf (":high\n Switches log severity to high\n");
+    printf (":critical\n Switches log severity to critical\n");
+    printf (":user:user_name\n Switches user to user_name\n");
+}
+
+int main(int cnt , char** args)
+{
+    std::list<std::string> files;
+
+    for (int id=1;id < cnt ;id++)
+    {
+        if((string(args[id])=="--help" || string(args[id])=="-help") || string(args[id])=="/help")
+            printHelp();
+        else //file name
+            files.push_back(args[id]);
+    }
+    ALogger* logger;
+    if(files.empty())
+        logger=new ALogger(); //write stdout
+    else
+    {
+        list<string>::iterator it=files.begin();
+        logger=new ALogger(new ALogFileWriter(*it));
+        it++;
+        while (it != files.end())
+        {
+            logger->registerNewWriter(new ALogFileWriter(*it));
+            it++;
+        }
 
     }
-
-
-};
-
-void thread1_func(ALogger* logger)
-{
-    for (auto id=0 ; id <50;id++)
-        *logger << "thread 1 logging " + std::to_string(id);
-
-}
-
-void thread2_func(ALogger* logger)
-{
-    for (auto id=0 ; id <50;id++)
-        *logger << "thread 2 logging " + std::to_string(id);
-
-}
-
-
-int main(int , char**)
-{
-    //Create a Logger object.If a ALogBaseWriter object is not provided , it creates a ALogWriter and register it as the first writer object.
-    ALogger myLogger; //Logger with default std out writer
-
-    //add a second writer that writes to file test1.txt
-    myLogger.registerNewWriter(new ALogFileWriter("test1.txt"));
-
-    //one more stdout writers
-    myLogger.registerNewWriter(new ALogWriter());
-
-
-    //create two threads to test threaded publishers
-    thread t1=thread(&thread1_func,&myLogger);
-    thread t2=thread(&thread2_func,&myLogger);
-
-    //at this point logs are written to 3 different target , 2 on stdout one copy in test1.txt
-    myLogger << "My first Log"; // now you should see My first log twice in console and also in 1 entry in test1.txt. with default severity and no User
-    myLogger (ALcritical) << "This is a very critical log"; //severity is changed
-    myLogger (ALlow,"main.cpp (line :32)") << "something is not right here"; //user info is added to the log
-
-    //add another writer with custom Formatter
-    myLogger.registerNewWriter(new ALogFileWriter("customLog.txt",new MyFormatter()));
-
-    //new writer writes logs with a custom format defined in class MyFormatter
-
-    myLogger << " This log is channeled to 4 diffferent writer";
-    t1.join();
-    t2.join();
-
-
+    for (string line; getline(std::cin, line);) {
+        //   cout << line;
+        if(line[0]==':')
+        {
+            if(!processCommand(line))
+                break;
+        }
+        else
+        {
+            (*logger)(severity,user) << line ;
+        }
+    }
+    delete logger;
     return 0;
+
 }

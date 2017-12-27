@@ -2,13 +2,24 @@
 #include "alogbasewriter.h"
 #include "alogger.h"
 #include <iostream>
-
+class FileOpenException: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Log File cannot be opened.";
+  }
+} myex;
 
 ALogFileWriter::ALogFileWriter(string fileName, ALogFormatter *formatter) : ALogBaseWriter(formatter)
 {
     //ALogBaseWriter::ALogBaseWriter(formatter);
     m_fileStream=new fstream();
     m_fileStream->open (fileName, std::fstream::in | std::fstream::out | std::fstream::app);
+    if (!m_fileStream->is_open())
+    {
+        FileOpenException e;
+        throw (&e);
+    }
 
 }
 

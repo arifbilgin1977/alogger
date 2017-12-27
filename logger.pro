@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     alogbasewriter.cpp \
     alogfilewriter.cpp \
     alogwriter.cpp \
-    alogformatter.cpp
+    alogformatter.cpp \
+    main_t1.cpp
 
 HEADERS += \
     alogger.h \
