@@ -120,3 +120,43 @@ Commands:<br />
  Switches log severity to critical<br />
 :user:user_name<br />
  Switches user to user_name<br />
+
+ Example:
+```bash
+$ ./alogger file1.txt file2.txt
+Starting Logging
+log text 1
+log text 2
+:critical
+these logs should be marked as critical
+:warning
+now only warnings
+:user:Arif Bilgin
+these logs are coming from Arif
+test
+gg
+sdfasdfasdfsdfdsf
+.quit
+bye!
+$ cat file1.txt
+[ALogger Demo] [Tue Dec 26 21:05:30 2017] (Warning) :Starting Logging
+[ALogger Demo] [Tue Dec 26 21:05:38 2017] (Warning) :log text 1
+[ALogger Demo] [Tue Dec 26 21:05:43 2017] (Warning) :log text 2
+[ALogger Demo] [Tue Dec 26 21:05:57 2017] (critical) :these logs should be marked as critical
+[ALogger Demo] [Tue Dec 26 21:06:06 2017] (Warning) :now only warnings
+[Arif Bilgin] [Tue Dec 26 21:06:21 2017] (Warning) :these logs are coming from Arif
+[Arif Bilgin] [Tue Dec 26 21:06:25 2017] (Warning) :test
+[Arif Bilgin] [Tue Dec 26 21:06:26 2017] (Warning) :gg
+[Arif Bilgin] [Tue Dec 26 21:06:27 2017] (Warning) :sdfasdfasdfsdfdsf
+$ cat file2.txt
+[ALogger Demo] [Tue Dec 26 21:05:30 2017] (Warning) :Starting Logging
+[ALogger Demo] [Tue Dec 26 21:05:38 2017] (Warning) :log text 1
+[ALogger Demo] [Tue Dec 26 21:05:43 2017] (Warning) :log text 2
+[ALogger Demo] [Tue Dec 26 21:05:57 2017] (critical) :these logs should be marked as critical
+[ALogger Demo] [Tue Dec 26 21:06:06 2017] (Warning) :now only warnings
+[Arif Bilgin] [Tue Dec 26 21:06:21 2017] (Warning) :these logs are coming from Arif
+[Arif Bilgin] [Tue Dec 26 21:06:25 2017] (Warning) :test
+[Arif Bilgin] [Tue Dec 26 21:06:26 2017] (Warning) :gg
+[Arif Bilgin] [Tue Dec 26 21:06:27 2017] (Warning) :sdfasdfasdfsdfdsf
+$
+```

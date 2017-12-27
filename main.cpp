@@ -98,7 +98,8 @@ int main(int cnt , char** args)
         }
 
     }
-    for (string line; getline(std::cin, line);) {
+    for (string line; getline(std::cin, line);)
+    {
         //   cout << line;
         if(line[0]==':')
         {
@@ -111,6 +112,7 @@ int main(int cnt , char** args)
         }
     }
     delete logger;
+    printf ("bye!");
     return 0;
 
 }
