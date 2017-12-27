@@ -94,3 +94,29 @@ int main(int , char**)
 }
 
 ```
+## Demo command line tool - alogbroadcaster <br />
+ALogBroadcaster is a small utility that takes log texts from stdin and writes to multiple files.<br />
+It has a small set of commands to change two states of logger , severity and user.<br />
+Documentation of this tool is:<br />
+Log Broadcaster (v:0.99)<br />
+Utility to write stdin logs to multiple files.<br />
+Usage:<br />
+ALogger [file list]<br />
+Example :<br />
+alogger file1.txt file2.txt file3.txt<br />
+<br />
+Commands:<br />
+:quit<br />
+ terminates the program<br />
+:warning<br />
+ Switches log severity to warning<br />
+:low<br />
+ Switches log severity to low<br />
+:medium<br />
+ Switches log severity to medium<br />
+:high<br />
+ Switches log severity to high<br />
+:critical<br />
+ Switches log severity to critical<br />
+:user:user_name<br />
+ Switches user to user_name<br />

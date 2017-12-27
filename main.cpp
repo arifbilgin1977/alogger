@@ -1,5 +1,5 @@
 /*
-Log Splitter (v:0.99)
+Log Broadcaster (v:0.99)
 Utility to write stdin logs to multiple files.
 Usage:
 ALogger [file list]
@@ -56,7 +56,7 @@ bool processCommand(string line)
 
 static void printHelp()
 {
-    printf ("Log Splitter (v:0.99)\n");
+    printf ("Log Broadcaster (v:0.99)\n");
     printf ("Utility to write stdin logs to multiple files.\n");
     printf ("Usage:\n");
     printf ("ALogger [file list]\n");
